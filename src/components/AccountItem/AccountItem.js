@@ -1,23 +1,30 @@
+import PropTypes from 'prop-types';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './AccountItem.module.scss';
 import classNames from 'classnames/bind';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import Image from '../Image/image';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-function AcccoutItem() {
+function AcccoutItem({ data, onClick }) {
     return (
-        <div className={cx('wrapper')}>
-            <img src="" className={cx('avatar')} alt="AAAAA"></img>
+        <Link to={`/@${data.nickname}`} className={cx('wrapper')} onClick={onClick}>
+            <Image src={data.avatar} className={cx('avatar')} alt={data.full_name} />
             <div className={cx('info')}>
                 <h4 className={cx('name')}>
-                    <span>NguyenVanA</span>
-                    <FontAwesomeIcon className={cx('check')} icon={faCheckCircle} />
+                    <span>{data.full_name}</span>
+                    {data.tick && <FontAwesomeIcon className={cx('check')} icon={faCheckCircle} />}
                 </h4>
-                <span className={cx('username')}> nguyenvanaaaa</span>
+                <span className={cx('username')}>{data.nickname}</span>
             </div>
-        </div>
+        </Link>
     );
 }
 
+AcccoutItem.propTypes = {
+    data: PropTypes.object.isRequired,
+};
 export default AcccoutItem;

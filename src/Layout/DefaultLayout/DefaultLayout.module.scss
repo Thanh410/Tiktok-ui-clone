@@ -1,16 +1,17 @@
-.wrapper{
+.wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.container{
+.container {
     width: 100%;
     display: flex;
+    margin-top: 60px;
 }
 
-.content{
+.content {
     flex: 1;
-    background-color: #ccc  ;
+    background-color: #ccc;
     min-height: 1000px;
 }

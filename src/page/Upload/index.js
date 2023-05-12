@@ -1,5 +1,3 @@
-import Header from '~/Layout/components/Header';
-
 function Upload() {
     return (
         <div>
