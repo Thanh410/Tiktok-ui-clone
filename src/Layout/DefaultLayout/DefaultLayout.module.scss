@@ -7,11 +7,13 @@
 .container {
     width: 100%;
     display: flex;
+    justify-content: space-between;
     margin-top: 60px;
+    flex: 1 1 auto;
 }
 
 .content {
     flex: 1;
-    background-color: #ccc;
     min-height: 1000px;
+    background-color: var(--white);
 }

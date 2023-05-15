@@ -1,0 +1,139 @@
+.container {
+    align-items: flex-start;
+    padding: 20px 0;
+    max-width: 692px;
+    position: relative;
+    flex-direction: row;
+}
+
+.infoItem {
+    display: flex;
+}
+.info {
+    margin-right: 114px;
+    margin-left: 12px;
+    flex: 1;
+}
+
+.avatar {
+    width: 56px;
+    height: 56px;
+}
+
+.authorContainer {
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-right: 4px;
+    padding: 0;
+}
+
+.authorName {
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+.text {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.Music {
+    margin-right: 5px;
+    width: 12px;
+    height: 12px;
+    color: #161823bf;
+    font-weight: 400;
+}
+
+.Linkmusic {
+    font-size: 1.6rem;
+    padding: 0;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+// Video player
+.videoCard {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.videoPlayer {
+    margin-right: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.videoContent {
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 1919px) {
+    .videoPlayer {
+        height: calc(450px + (100vw - 768px) / 1152 * 200);
+    }
+}
+
+// ActionItem
+.actionItem {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.btn-actionItem {
+    background-color: transparent;
+}
+
+.circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    background-color: #1618230f;
+    margin-top: 8px;
+    margin-bottom: 6px;
+
+    + .circle {
+        margin: 8px 0 6px;
+    }
+}
+
+.actionIcon {
+    margin: 0;
+    padding: 0;
+    width: 21px;
+    height: 19px;
+}
+
+.text {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #161823bf;
+}
+
+// controls
+.controlsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    background-color: transparent;
+    margin-top: -50vw;
+    padding: 0 40px;
+    z-index: 20;
+}

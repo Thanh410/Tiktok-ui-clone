@@ -1,0 +1,55 @@
+.scrollSidebar {
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    perspective-origin: right top;
+    top: 60px;
+    bottom: 0;
+    width: 240px;
+    background: rgba(255, 255, 255, 1);
+    position: fixed;
+    padding-right: 8px;
+
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+
+    &:hover .scrollBar {
+        opacity: 1;
+    }
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 224px;
+    min-height: 100vh;
+    background-color: var(--white);
+    padding: 20px 0 26px 8px;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.scrollBar {
+    position: absolute;
+    padding: 0 4px;
+    top: 0;
+    transition: opacity 0.5s;
+    opacity: 0;
+    right: 0;
+    transform-origin: right top;
+    height: 400px;
+    opacity: 0;
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1) scale(1.9297) translateZ(-0.929697px)
+        translateZ(-2px);
+}
+
+.scrollBarThumb {
+    width: 6px;
+    height: 100%;
+    border-radius: 3px;
+    background: rgba(22, 24, 35, 0.06);
+}

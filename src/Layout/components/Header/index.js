@@ -14,6 +14,8 @@ import { InboxIcon, MessageIcon } from '~/components/Icons/icon';
 import config from '~/config/config';
 import Image from '~/components/Image/image';
 import Search from '~/components/Search/Search';
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
 const cx = classNames.bind(styles);
 
@@ -102,10 +104,21 @@ const MENU_ITEMS = [
 
 function Header() {
     const handleonChange = (menuItem) => {
-        console.log(menuItem);
+        alert(menuItem.code);
     };
 
     const currentUser = true;
+
+    // Hanlde changelauguage
+
+    const hanldeChangeLanguage = (menuItem) => {
+        switch (menuItem.style) {
+            case 'language':
+                console.log(menuItem.code);
+                break;
+            default:
+        }
+    };
     const userMenu = [
         {
             icon: (
@@ -198,13 +211,13 @@ function Header() {
                                 <span>Upload</span>
                             </Button>
                             {/* message */}
-                            <Tippy content="Messages" placement="bottom">
+                            <Tippy delay={[0, 200]} content="Messages" placement="bottom">
                                 <button className={cx('action-btn')}>
                                     <MessageIcon />
                                 </button>
                             </Tippy>
                             {/* Inbox */}
-                            <Tippy content="Inbox" placement="bottom">
+                            <Tippy delay={[0, 200]} content="Inbox" placement="bottom">
                                 <button className={cx('action-btn')}>
                                     <InboxIcon />
                                 </button>
@@ -218,7 +231,11 @@ function Header() {
                             <Button primary>Log in</Button>
                         </>
                     )}
-                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleonChange}>
+                    <Menu
+                        items={currentUser ? userMenu : MENU_ITEMS}
+                        onChange={handleonChange}
+                        onClick={hanldeChangeLanguage}
+                    >
                         {currentUser ? (
                             <Image
                                 src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7225623775797051397~c5_720x720.jpeg?x-expires=1683946800&x-signature=VpFi58cqRBMfaqqM34BjS%2B8Y80o%3D"

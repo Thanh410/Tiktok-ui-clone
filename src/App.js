@@ -2,8 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Fragment } from 'react';
 import { publicRoutes } from '~/routes';
 import { DefaultLayout } from '~/Layout';
-import SignIn from './screens/Signin';
-import Panel from './screens/Panel';
 
 function App() {
     return (
@@ -32,8 +30,6 @@ function App() {
                         );
                     })}
                 </Routes>
-                <Routes path="/sign-in" component={SignIn} />
-                <Routes path="/" component={Panel} />
             </div>
         </Router>
     );
