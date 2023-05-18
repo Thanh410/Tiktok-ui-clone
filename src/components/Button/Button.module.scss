@@ -80,6 +80,17 @@
         text-decoration: underline;
     }
 }
+
+.textPrimary {
+    color: var(--primary);
+    background-color: transparent;
+    padding: 0;
+
+    margin-left: -16px;
+    &:hover {
+        text-decoration: underline;
+    }
+}
 .rounded {
     border-radius: 52px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
@@ -102,6 +113,11 @@
     font-size: 1.8rem;
 }
 
+.title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    flex: 1;
+}
 .circle {
     display: flex;
     align-items: center;
@@ -112,4 +128,12 @@
     background-color: none;
     cursor: pointer;
     padding: 0;
+}
+
+.boxContainer {
+    width: 375px;
+    height: 44px;
+    border: 1px solid #1618231f;
+    border-radius: 0;
+    padding: 0 12px;
 }

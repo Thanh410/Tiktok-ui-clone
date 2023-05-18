@@ -1,5 +1,6 @@
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import Login from '../components/screens/Login';
 import styles from './DefaultLayout.module.scss';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
@@ -8,6 +9,7 @@ const cx = classNames.bind(styles);
 function DefaultLayout({ children }) {
     return (
         <div className={cx('wrapper')}>
+            <Login />
             <Header />
             <div className={cx('container')}>
                 <Sidebar />

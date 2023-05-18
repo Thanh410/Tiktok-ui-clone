@@ -1,5 +1,10 @@
-function Following() {
-    return ( <h2>Follwing page</h2> );
-}
+import useElementOnScreen from '~/components/useElementOnScreen/useElementOnScreen';
 
+function Following() {
+    return (
+        <div>
+            <useElementOnScreen />
+        </div>
+    );
+}
 export default Following;

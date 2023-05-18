@@ -3,9 +3,8 @@ import { useState, useRef, useEffect } from 'react';
 import { faComment, faHeart, faPlay, faShare, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 import styles from './Video.module.scss';
 import classNames from 'classnames/bind';
-import Button from '~/components/Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import video from '~/assets/videos/dog.mp4';
+import videos from '~/assets/videos/1.mp4';
 import useElementOnScreen from '~/components/useElementOnScreen';
 
 const cx = classNames.bind(styles);
@@ -40,8 +39,22 @@ function VideoContent() {
             videoRef.current.pause();
             setPlaying(false);
         } else {
-            videoRef.current.play();
+            videoRef.current.play([]);
             setPlaying(true);
+        }
+    };
+
+    // Xu li like video
+    const currentIndex = 190;
+    const [active, setActive] = useState(false);
+    const [like, setLike] = useState(currentIndex);
+    const handleLike = () => {
+        if (like !== currentIndex) {
+            setLike(like - 1);
+            setActive(false);
+        } else {
+            setLike(like + 1);
+            setActive(true);
         }
     };
 
@@ -54,18 +67,23 @@ function VideoContent() {
                     className={cx('videoPlayer')}
                     width="320"
                     height="240"
-                    src={video}
+                    src={videos}
                     controls
                     loop
                 ></video>
             </div>
 
             <div className={cx('actionItem')}>
-                <button className={cx('btn-actionItem')}>
+                <button className={cx('btn-actionItem')} onClick={handleLike}>
                     <span className={cx('circle')}>
-                        <FontAwesomeIcon icon={faHeart} className={cx('actionIcon')} />
+                        <FontAwesomeIcon
+                            icon={faHeart}
+                            className={cx('actionLikeIcon', {
+                                active: active,
+                            })}
+                        />
                     </span>
-                    <strong className={cx('text')}>195.4k</strong>
+                    <strong className={cx('text')}>{like}</strong>
                 </button>
                 <button className={cx('btn-actionItem')}>
                     <span className={cx('circle')}>

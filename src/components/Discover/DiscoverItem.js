@@ -2,7 +2,7 @@ import styles from './Discover.module.scss';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
-import { HashtagIcon, MusictagIcon } from '../Icons/icon';
+import { HashtagIcon } from '../Icons/icon';
 
 const cx = classNames.bind(styles);
 
@@ -16,8 +16,6 @@ function DiscoverItem() {
     );
 }
 
-DiscoverItem.propTypes = {
-    label: PropTypes.string.isRequired,
-};
+DiscoverItem.propTypes = {};
 
 export default DiscoverItem;

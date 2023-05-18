@@ -48,9 +48,6 @@ function Sidebar() {
                     ></MenuItem>
                 </Menu>
                 <SuggestedAccounts label="Suggested accounts " />
-                <SuggestedAccounts label="Following  accounts" />
-                <SuggestedAccounts label="Following  accounts" />
-                <SuggestedAccounts label="Following  accounts" />
                 <Discover label="Discover" />
                 <div className={cx('scrollBar')}>
                     <div className={cx('scrollBarThumb')}></div>

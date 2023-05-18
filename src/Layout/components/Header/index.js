@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
@@ -14,8 +16,7 @@ import { InboxIcon, MessageIcon } from '~/components/Icons/icon';
 import config from '~/config/config';
 import Image from '~/components/Image/image';
 import Search from '~/components/Search/Search';
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import Login from '~/Layout/components/screens';
 
 const cx = classNames.bind(styles);
 
@@ -23,7 +24,6 @@ const MENU_ITEMS = [
     {
         icon: (
             <svg
-                class="css-g0144v"
                 width="1em"
                 data-e2e=""
                 height="1em"
@@ -63,7 +63,6 @@ const MENU_ITEMS = [
     {
         icon: (
             <svg
-                class="css-g0144v"
                 width="1em"
                 data-e2e=""
                 height="1em"
@@ -83,7 +82,6 @@ const MENU_ITEMS = [
     {
         icon: (
             <svg
-                class="css-g0144v"
                 width="1em"
                 data-e2e=""
                 height="1em"
@@ -107,7 +105,21 @@ function Header() {
         alert(menuItem.code);
     };
 
-    const currentUser = true;
+    // Xu li dang nhap
+    const currentUser = false;
+    // const currentToken = firebase.auth().currentUser;
+    // if (currentToken) {
+    //     return currentToken.getIdToken();
+    // }
+    // const hasRememberedAccount = localStorage.getItem('firebaseui::remmemberedAccount');
+
+    // if (!hasRememberedAccount) {
+    //     return null;
+    // }
+    // Xu ly showmodal
+    const handleShowModal = (prop) => {
+        console.log(prop);
+    };
 
     // Hanlde changelauguage
 
@@ -118,12 +130,12 @@ function Header() {
                 break;
             default:
         }
+        console.log(menuItem);
     };
     const userMenu = [
         {
             icon: (
                 <svg
-                    class="css-g0144v"
                     width="1em"
                     data-e2e=""
                     height="1em"
@@ -144,7 +156,6 @@ function Header() {
         {
             icon: (
                 <svg
-                    class="css-g0144v"
                     width="1em"
                     data-e2e=""
                     height="1em"
@@ -170,7 +181,6 @@ function Header() {
         {
             icon: (
                 <svg
-                    class="css-g0144v"
                     width="1em"
                     data-e2e=""
                     height="1em"
@@ -228,7 +238,9 @@ function Header() {
                             <Button outline leftIcon={<FontAwesomeIcon icon={faPlus} />}>
                                 <span>Upload</span>
                             </Button>
-                            <Button primary>Log in</Button>
+                            <Button primary onClick={() => handleShowModal(<Login />)}>
+                                Log in
+                            </Button>
                         </>
                     )}
                     <Menu

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { faMusic } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import Button from '~/components/Button/Button';
@@ -12,6 +14,15 @@ import AccountPreview from '~/components/SuggestedAccounts/AccountPreview';
 const cx = classNames.bind(styles);
 
 function VideoItem() {
+    const [active, setActive] = useState(false);
+
+    const handleActive = () => {
+        if (active) {
+            setActive(false);
+        } else {
+            setActive(true);
+        }
+    };
     const renderPreview = (props) => {
         return (
             <div tabIndex="-1" {...props}>
@@ -45,7 +56,15 @@ function VideoItem() {
                     </Button>
                 </h4>
             </div>
-            <Button small primaryOutline>
+
+            <Button
+                small
+                primaryOutline
+                className={cx('follow', {
+                    active: active,
+                })}
+                onClick={handleActive}
+            >
                 Follow
             </Button>
         </div>

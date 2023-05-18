@@ -1,9 +1,7 @@
-import Header from './Header';
+import Header from '~/Layout/components/Header';
 
 function HeaderOnly() {
-    return ( 
-        <Header/>
-     );
+    return <Header />;
 }
 
 export default HeaderOnly;

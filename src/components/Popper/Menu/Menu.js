@@ -38,7 +38,6 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
 
     return (
         <Tippy
-            visible
             interactive
             delay={[0, 700]}
             offset={[16, 10]}
@@ -71,5 +70,6 @@ Menu.propTypes = {
     items: PropTypes.array,
     hideOnClick: PropTypes.bool,
     onChange: PropTypes.func,
+    onClick: PropTypes.func,
 };
 export default Menu;

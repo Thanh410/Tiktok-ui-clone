@@ -1,9 +1,30 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Fragment } from 'react';
-import { publicRoutes } from '~/routes';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { DefaultLayout } from '~/Layout';
+import { publicRoutes } from '~/routes';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 
+// Configure Firebase.
+const config = {
+    apiKey: process.env.REACT_APP_FIREBASE_API,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+};
+
+firebase.initializeApp(config);
 function App() {
+    // Listen to the Firebase Auth state and set the local state.
+    useEffect(() => {
+        const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async (user) => {
+            if (!user) {
+                console.log('logout');
+                return;
+            }
+            const token = await user.getIdToken();
+        });
+        return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
+    }, []);
     return (
         <Router>
             <div className="App">

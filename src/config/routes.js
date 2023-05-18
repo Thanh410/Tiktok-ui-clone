@@ -6,6 +6,7 @@ const routesConfig = {
     search: '/search',
     live: '/live',
     explore: '/explore',
+    signin: '/signin',
 };
 
 export default routesConfig;
