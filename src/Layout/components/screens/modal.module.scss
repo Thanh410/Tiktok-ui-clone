@@ -114,3 +114,74 @@
 .stepContainer {
     margin-top: 24px;
 }
+
+// Form login phone or email
+.formLogin {
+    display: flex;
+    width: 375px;
+    flex-direction: column;
+}
+
+.des {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 44px;
+    background-color: #f1f1f2;
+    border: 1px solid #1618231f;
+}
+
+.areaLabel {
+    width: 102px;
+    padding: 12px;
+    border-right: 1px solid #1618231f;
+}
+
+.CaretD {
+    margin-left: 5px;
+    flex: 1;
+}
+.inputContainer {
+    display: flex;
+    flex: 1;
+    border-left: 1px solib #1618231f;
+    & > input {
+        background-color: #f1f1f2;
+        width: 100%;
+        font-size: 1.6rem;
+        caret-color: #fe2c55;
+        padding: 12px;
+    }
+}
+
+.input {
+    margin-top: 16px;
+    display: flex;
+    background-color: #f1f1f2;
+    border-right: 1px solid #1618231f;
+    padding: 8px;
+}
+
+.btnSendcode {
+    background-color: #f1f1f2;
+    border-left: 1px solid #1618231f;
+}
+
+.sendcode {
+    flex: 1;
+    background-color: #f1f1f2;
+}
+
+.btnLogin {
+    display: flex;
+    justify-content: center;
+    background-color: #f1f1f2;
+    width: 100%;
+    margin-top: 16px;
+}

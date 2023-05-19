@@ -1,25 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
-import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
+import styles from './Header.module.scss';
 
-import firebase from 'firebase/compat/app';
-
-import Button from '~/components/Button/Button';
-import image from '~/assets/image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faEllipsisVertical, faSignIn } from '@fortawesome/free-solid-svg-icons';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
-import Menu from '~/components/Popper/Menu/Menu';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
-import { InboxIcon, MessageIcon } from '~/components/Icons/icon';
-import config from '~/config/config';
-import Image from '~/components/Image/image';
-import Search from '~/components/Search/Search';
+import { faEllipsisVertical, faPlus, faSignIn } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Tippy from '@tippyjs/react';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'tippy.js/dist/tippy.css';
 import Login from '~/Layout/components/screens';
-
+import image from '~/assets/image';
+import Button from '~/components/Button/Button';
+import { InboxIcon, MessageIcon } from '~/components/Icons/icon';
+import Image from '~/components/Image/image';
+import Menu from '~/components/Popper/Menu/Menu';
+import Search from '~/components/Search/Search';
+import config from '~/config/config';
+import * as http from '~/utils/http';
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -104,16 +104,28 @@ const MENU_ITEMS = [
 
 function Header() {
     const handleonChange = (menuItem) => {
-        alert(menuItem.code);
+        if (menuItem.title === 'Log out') {
+            currentUser.auth.signOut();
+            console.log(menuItem.to);
+        }
     };
 
     // Xu li dang nhap
-    const currentUser = true;
+    const currentUser = firebase.auth().currentUser;
+    useEffect(() => {
+        const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async (user) => {
+            if (!user) {
+                return null;
+            }
+            const token = await user.getIdToken();
+            // Get me when signed in
+        });
+        return () => {
+            unregisterAuthObserver();
+        };
 
-    // Xu ly showmodal
-    const handleShowModal = () => {};
-
-    // Hanlde changelauguage
+        // Make sure we un-register Firebase observers when the component unmounts.
+    }, []);
 
     const hanldeChangeLanguage = (menuItem) => {
         switch (menuItem.style) {
@@ -194,10 +206,11 @@ function Header() {
         {
             icon: <FontAwesomeIcon icon={faSignIn} />,
             title: 'Log out',
-            to: '/logout',
+            to: '/',
             separate: true,
         },
     ];
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -207,7 +220,7 @@ function Header() {
                 {/* Search */}
                 <Search />
                 <div className={cx('actions')}>
-                    {currentUser ? (
+                    {!!currentUser ? (
                         <>
                             <Button outline leftIcon={<FontAwesomeIcon icon={faPlus} />}>
                                 <span>Upload</span>
@@ -230,21 +243,17 @@ function Header() {
                             <Button outline leftIcon={<FontAwesomeIcon icon={faPlus} />}>
                                 <span>Upload</span>
                             </Button>
-                            <Button primary onClick={() => handleShowModal(<Login />)}>
+                            <Button to={config.routes.login} primary>
                                 Log in
                             </Button>
                         </>
                     )}
-                    <Menu
-                        items={currentUser ? userMenu : MENU_ITEMS}
-                        onChange={handleonChange}
-                        onClick={hanldeChangeLanguage}
-                    >
-                        {currentUser ? (
+                    <Menu items={userMenu} onChange={handleonChange}>
+                        {!!currentUser ? (
                             <Image
-                                src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7225623775797051397~c5_720x720.jpeg?x-expires=1683946800&x-signature=VpFi58cqRBMfaqqM34BjS%2B8Y80o%3D"
+                                src={currentUser.photoURL}
                                 className={cx('user-avatar')}
-                                alt="NguyenVanA"
+                                alt={currentUser.displayName}
                             />
                         ) : (
                             <button className={cx('more-btn')}>

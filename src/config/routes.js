@@ -9,6 +9,7 @@ const routesConfig = {
     signup: '/signup',
     login: '/login',
     qrcode: '/qrcode',
+    email: '/email',
 };
 
 export default routesConfig;

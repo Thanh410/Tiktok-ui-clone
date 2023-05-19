@@ -23,11 +23,9 @@ function UserName() {
             {modal && (
                 <div className={cx('wrapper')}>
                     <div className={cx('modal')}>
-                        <Link to={config.routes.home}>
-                            <div className={cx('closeModal')} onClick={handleCloseModal}>
-                                <FontAwesomeIcon className={cx('close')} icon={faXmark}></FontAwesomeIcon>
-                            </div>
-                        </Link>
+                        <div className={cx('closeModal')} onClick={handleCloseModal}>
+                            <FontAwesomeIcon className={cx('close')} icon={faXmark}></FontAwesomeIcon>
+                        </div>
                         <Link to={config.routes.login}>
                             <div className={cx('backSign')}>
                                 <FontAwesomeIcon icon={faChevronLeft} className={cx('chevronLeft')}></FontAwesomeIcon>

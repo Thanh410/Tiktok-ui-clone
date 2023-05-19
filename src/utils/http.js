@@ -6,7 +6,7 @@ const http = axios.create({
     baseURL: process.env.REACT_APP_BASE_URL,
 });
 
-const getFirebaseToken = async () => {
+export const getFirebaseToken = async () => {
     const currentUser = firebase.auth().currentUser;
     if (currentUser) return currentUser.getIdToken();
 
@@ -21,7 +21,7 @@ const getFirebaseToken = async () => {
     return new Promise((resolve, reject) => {
         const waitTimer = setTimeout(() => {
             reject(null);
-        }, 10000);
+        }, 5000);
 
         const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async (user) => {
             if (!user) {

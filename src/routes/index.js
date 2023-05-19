@@ -10,7 +10,8 @@ import Search from '~/components/Search/Search';
 import Live from '~/page/Live';
 import Login from '~/Layout/components/screens/Login';
 import SignUp from '~/Layout/components/screens/Signup';
-import UserName from '~/Layout/components/screens/Username';
+import UserName from '~/Layout/components/screens/Username/useQR';
+import Email from '~/Layout/components/screens/Username/Email';
 
 const publicRoutes = [
     { path: config.routes.home, components: Home },
@@ -19,9 +20,10 @@ const publicRoutes = [
     { path: config.routes.upload, components: Upload, layout: HeaderOnly },
     { path: config.routes.search, components: Search, layout: HeaderOnly },
     { path: config.routes.live, components: Live, layout: HeaderOnly },
-    { path: config.routes.signup, components: SignUp, layout: SignUp },
-    { path: config.routes.login, components: Login, layout: Login },
-    { path: config.routes.qrcode, components: UserName, layout: UserName },
+    { path: config.routes.signup, components: SignUp },
+    { path: config.routes.login, components: Login },
+    { path: config.routes.qrcode, components: UserName },
+    { path: config.routes.email, components: Email },
 ];
 
 const privateRoutes = [];

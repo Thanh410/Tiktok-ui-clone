@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom';
 import Button from '~/components/Button/Button';
 import { FBIcon, GGIcon, LineIcon, QRIcon, TalkIcon, TwitterIcon, UserIcon } from '~/components/Icons/icon';
 import styles from './modal.module.scss';
-import SignUp from './Signup';
 import config from '~/config/config';
 const cx = classNames.bind(styles);
 
@@ -38,11 +37,9 @@ function Login() {
             {modal && (
                 <div className={cx('wrapper')}>
                     <div className={cx('modal')}>
-                        <Link to={config.routes.home}>
-                            <div className={cx('closeModal')} onClick={handleCloseModal}>
-                                <FontAwesomeIcon className={cx('close')} icon={faXmark}></FontAwesomeIcon>
-                            </div>
-                        </Link>
+                        <div className={cx('closeModal')} onClick={handleCloseModal}>
+                            <FontAwesomeIcon className={cx('close')} icon={faXmark}></FontAwesomeIcon>
+                        </div>
                         <div className={cx('loginContainer')}>
                             <h2 className={cx('titleModal')}>Log in to TikTok</h2>
                             <Link className={cx('boxLink')} to={config.routes.qrcode}>
@@ -50,7 +47,7 @@ function Login() {
                                     <p className={cx('textLogin')}>Use QR code</p>
                                 </Button>
                             </Link>
-                            <Link className={cx('boxLink')}>
+                            <Link className={cx('boxLink')} to={config.routes.email}>
                                 <Button boxContainer leftIcon={<UserIcon />}>
                                     <p className={cx('textLogin')}>Use phone / email / username</p>
                                 </Button>
@@ -85,7 +82,9 @@ function Login() {
                                     <p className={cx('textLogin')}>Continue with KakaoTalk</p>
                                 </Button>
                             </Link>
-                            <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+                            <Link to={config.routes.home}>
+                                <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+                            </Link>
                         </div>
                         <div className={cx('footerModal')}>
                             <div className={cx('bottomText')}>

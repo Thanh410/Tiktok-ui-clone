@@ -18,10 +18,14 @@ function App() {
     useEffect(() => {
         const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async (user) => {
             if (!user) {
+                console.log('faile');
                 return null;
             }
             const token = await user.getIdToken();
             // Get me when signed in
+            // console.log('Token: ', token);
+            // console.log('UserName:', user.displayName);
+            // console.log('UserName:', user.photoURL);
         });
         return () => {
             unregisterAuthObserver();
@@ -29,6 +33,7 @@ function App() {
 
         // Make sure we un-register Firebase observers when the component unmounts.
     }, []);
+
     return (
         <Router>
             <div className="App">

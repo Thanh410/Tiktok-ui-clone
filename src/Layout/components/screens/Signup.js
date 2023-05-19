@@ -43,11 +43,9 @@ function SignUp() {
             {modal && (
                 <div className={cx('wrapper')}>
                     <div className={cx('modal')}>
-                        <Link to={config.routes.home}>
-                            <div className={cx('closeModal')} onClick={handleCloseModal}>
-                                <FontAwesomeIcon className={cx('close')} icon={faXmark}></FontAwesomeIcon>
-                            </div>
-                        </Link>
+                        <div className={cx('closeModal')} onClick={handleCloseModal}>
+                            <FontAwesomeIcon className={cx('close')} icon={faXmark}></FontAwesomeIcon>
+                        </div>
                         <Link to={config.routes.login}>
                             <div className={cx('backSign')}>
                                 <FontAwesomeIcon icon={faChevronLeft} className={cx('chevronLeft')}></FontAwesomeIcon>
@@ -57,7 +55,7 @@ function SignUp() {
                             <h2 className={cx('titleModal')}>Sign up to TikTok</h2>
 
                             <Link className={cx('boxLink')}>
-                                <Button boxContainer leftIcon={<UserIcon />}>
+                                <Button boxContainer leftIcon={<UserIcon />} to={config.routes.email}>
                                     <p className={cx('textLogin')}>Use phone / email / username</p>
                                 </Button>
                             </Link>
