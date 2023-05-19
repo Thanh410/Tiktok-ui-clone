@@ -19,8 +19,8 @@ const cx = classNames.bind(styles);
 
 function Sidebar() {
     return (
-        <aside className={cx('wrapper')}>
-            <div className={cx('scrollSidebar')}>
+        <div className={cx('scrollSidebar')}>
+            <aside className={cx('wrapper')}>
                 <Menu>
                     <MenuItem
                         title="For You"
@@ -49,11 +49,11 @@ function Sidebar() {
                 </Menu>
                 <SuggestedAccounts label="Suggested accounts " />
                 <Discover label="Discover" />
-                <div className={cx('scrollBar')}>
-                    <div className={cx('scrollBarThumb')}></div>
-                </div>
+            </aside>
+            <div className={cx('scrollBar')}>
+                <div className={cx('scrollBarThumb')}></div>
             </div>
-        </aside>
+        </div>
     );
 }
 

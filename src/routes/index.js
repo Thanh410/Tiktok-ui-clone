@@ -9,6 +9,8 @@ import Upload from '~/page/Upload';
 import Search from '~/components/Search/Search';
 import Live from '~/page/Live';
 import Login from '~/Layout/components/screens/Login';
+import SignUp from '~/Layout/components/screens/Signup';
+import UserName from '~/Layout/components/screens/Username';
 
 const publicRoutes = [
     { path: config.routes.home, components: Home },
@@ -17,7 +19,9 @@ const publicRoutes = [
     { path: config.routes.upload, components: Upload, layout: HeaderOnly },
     { path: config.routes.search, components: Search, layout: HeaderOnly },
     { path: config.routes.live, components: Live, layout: HeaderOnly },
-    { path: config.routes.signin, components: Login, layout: null },
+    { path: config.routes.signup, components: SignUp, layout: SignUp },
+    { path: config.routes.login, components: Login, layout: Login },
+    { path: config.routes.qrcode, components: UserName, layout: UserName },
 ];
 
 const privateRoutes = [];

@@ -6,11 +6,11 @@ import PropTypes from 'prop-types';
 
 const cx = classNames.bind(styles);
 
-const Image = forwardRef(({ src, alt, className, ...props }, ref) => {
+const Image = forwardRef(({ src, alt, className, fallback: customFallback = images.noImage, ...props }, ref) => {
     const [fallback, setFallback] = useState('');
 
     const handleError = () => {
-        setFallback(images.noImage);
+        setFallback(customFallback);
     };
     // eslint-disable-next-line jsx-a11y/alt-text
     return (

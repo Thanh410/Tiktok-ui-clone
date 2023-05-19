@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faChevronDown, faChevronLeft, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import firebase from 'firebase/compat/app';
@@ -10,8 +10,8 @@ import { Link } from 'react-router-dom';
 import Button from '~/components/Button/Button';
 import { FBIcon, GGIcon, LineIcon, QRIcon, TalkIcon, TwitterIcon, UserIcon } from '~/components/Icons/icon';
 import styles from './modal.module.scss';
-import SignUp from './Signup';
 import config from '~/config/config';
+
 const cx = classNames.bind(styles);
 
 // Authen username/password
@@ -27,7 +27,12 @@ const uiConfig = {
     },
 };
 
-function Login() {
+function SignUp() {
+    const [menuItem, setMenuItem] = useState(false);
+    const handleShowMenu = () => {
+        setMenuItem(true);
+    };
+
     const [modal, setModal] = useState(true);
     const handleCloseModal = () => {
         setModal(false);
@@ -43,13 +48,14 @@ function Login() {
                                 <FontAwesomeIcon className={cx('close')} icon={faXmark}></FontAwesomeIcon>
                             </div>
                         </Link>
+                        <Link to={config.routes.login}>
+                            <div className={cx('backSign')}>
+                                <FontAwesomeIcon icon={faChevronLeft} className={cx('chevronLeft')}></FontAwesomeIcon>
+                            </div>
+                        </Link>
                         <div className={cx('loginContainer')}>
-                            <h2 className={cx('titleModal')}>Log in to TikTok</h2>
-                            <Link className={cx('boxLink')} to={config.routes.qrcode}>
-                                <Button boxContainer leftIcon={<QRIcon />}>
-                                    <p className={cx('textLogin')}>Use QR code</p>
-                                </Button>
-                            </Link>
+                            <h2 className={cx('titleModal')}>Sign up to TikTok</h2>
+
                             <Link className={cx('boxLink')}>
                                 <Button boxContainer leftIcon={<UserIcon />}>
                                     <p className={cx('textLogin')}>Use phone / email / username</p>
@@ -60,39 +66,45 @@ function Login() {
                                     <p className={cx('textLogin')}>Continue with Facebook</p>
                                 </Button>
                             </Link>
-                            <Link className={cx('boxLink')} to={config.routes.login}>
+                            <Link className={cx('boxLink')}>
                                 <Button boxContainer leftIcon={<GGIcon />}>
                                     <p className={cx('textLogin')}>Continue with Google</p>
                                 </Button>
                             </Link>
-                            <Link className={cx('boxLink')}>
-                                <Button boxContainer leftIcon={<TwitterIcon />}>
-                                    <p className={cx('textLogin')}>Continue with Twitter</p>
-                                </Button>
-                            </Link>
-                            <Link className={cx('boxLink')}>
-                                <Button boxContainer leftIcon={<LineIcon />}>
-                                    <p className={cx('textLogin')}>Continue with LINE</p>
-                                </Button>
-                            </Link>
-                            <Link className={cx('boxLink')}>
-                                <Button boxContainer leftIcon={<TalkIcon />}>
-                                    <p className={cx('textLogin')}>Continue with KakaoTalk</p>
-                                </Button>
-                            </Link>
-                            <Link className={cx('boxLink')}>
-                                <Button boxContainer leftIcon={<UserIcon />}>
-                                    <p className={cx('textLogin')}>Continue with KakaoTalk</p>
-                                </Button>
-                            </Link>
-                            <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+                            {!menuItem && (
+                                <div>
+                                    <Button onClick={handleShowMenu}>
+                                        <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
+                                    </Button>
+                                </div>
+                            )}
+
+                            {menuItem && (
+                                <>
+                                    <Link className={cx('boxLink')}>
+                                        <Button boxContainer leftIcon={<TwitterIcon />}>
+                                            <p className={cx('textLogin')}>Continue with Twitter</p>
+                                        </Button>
+                                    </Link>
+                                    <Link className={cx('boxLink')}>
+                                        <Button boxContainer leftIcon={<LineIcon />}>
+                                            <p className={cx('textLogin')}>Continue with LINE</p>
+                                        </Button>
+                                    </Link>
+                                    <Link className={cx('boxLink')}>
+                                        <Button boxContainer leftIcon={<TalkIcon />}>
+                                            <p className={cx('textLogin')}>Continue with KakaoTalk</p>
+                                        </Button>
+                                    </Link>
+                                </>
+                            )}
                         </div>
                         <div className={cx('footerModal')}>
                             <div className={cx('bottomText')}>
-                                <p>Don’t have an account?</p>
-                                <Link to={config.routes.signup}>
+                                <p>Already have an account? </p>
+                                <Link to={config.routes.login}>
                                     <Button textPrimary text to={null}>
-                                        Sign up
+                                        Log in
                                     </Button>
                                 </Link>
                             </div>
@@ -104,4 +116,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default SignUp;

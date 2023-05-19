@@ -6,7 +6,9 @@ const routesConfig = {
     search: '/search',
     live: '/live',
     explore: '/explore',
-    signin: '/signin',
+    signup: '/signup',
+    login: '/login',
+    qrcode: '/qrcode',
 };
 
 export default routesConfig;

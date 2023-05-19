@@ -22,8 +22,8 @@
 
 .closeModal {
     position: absolute;
-    top: 24px;
-    right: 24px;
+    top: 20px;
+    right: 20px;
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -42,11 +42,25 @@
     color: #161823fb;
 }
 
+// Back Sign
+.backSign {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    cursor: pointer;
+    transform: unset;
+}
+
+.chevronLeft {
+    width: 24px;
+    height: 24px;
+}
+
 .loginContainer {
     overflow: auto;
     display: flex;
     flex-direction: column;
-
+    flex: 1 1 0%;
     align-items: center;
 }
 
@@ -76,4 +90,27 @@
     align-items: center;
     justify-content: center;
     height: 64px;
+}
+
+// Qrcode
+.QRcode {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 208px;
+    border-radius: 11px;
+    border: 1px solid rgb(242, 242, 242);
+}
+
+.imgCode {
+    height: 170px;
+    width: 170px;
+    border-radius: 11px;
+    background: rgb(255, 255, 255);
+    padding: 12px;
+}
+
+.stepContainer {
+    margin-top: 24px;
 }

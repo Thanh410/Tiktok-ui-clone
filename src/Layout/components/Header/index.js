@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
+
+import firebase from 'firebase/compat/app';
 
 import Button from '~/components/Button/Button';
 import image from '~/assets/image';
@@ -106,20 +108,10 @@ function Header() {
     };
 
     // Xu li dang nhap
-    const currentUser = false;
-    // const currentToken = firebase.auth().currentUser;
-    // if (currentToken) {
-    //     return currentToken.getIdToken();
-    // }
-    // const hasRememberedAccount = localStorage.getItem('firebaseui::remmemberedAccount');
+    const currentUser = true;
 
-    // if (!hasRememberedAccount) {
-    //     return null;
-    // }
     // Xu ly showmodal
-    const handleShowModal = (prop) => {
-        console.log(prop);
-    };
+    const handleShowModal = () => {};
 
     // Hanlde changelauguage
 
