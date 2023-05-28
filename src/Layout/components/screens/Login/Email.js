@@ -1,13 +1,14 @@
 import { useState } from 'react';
 
-import { faCaretDown, faChevronLeft, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import Button from '~/components/Button/Button';
 import config from '~/config/config';
 import styles from '../modal.module.scss';
-
+import 'firebase/compat/auth';
+import firebase from 'firebase/compat/app';
 const cx = classNames.bind(styles);
 
 function Email() {
@@ -16,6 +17,22 @@ function Email() {
         setModal(false);
     };
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                // Signed in
+                console.log(userCredential);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
     return (
         <>
             {modal && (
@@ -33,33 +50,40 @@ function Email() {
                             <h2 className={cx('titleModal')}>Log in</h2>
                             <div className={cx('formLogin')}>
                                 <div className={cx('des')}>
-                                    <p>Phone</p>
+                                    <p>Email/username</p>
                                     <Button href={null} text>
                                         Log in with email or username
                                     </Button>
                                 </div>
                                 <div className={cx('label')}>
-                                    <span className={cx('areaLabel')}>
-                                        VN +84
-                                        <FontAwesomeIcon icon={faCaretDown} className={cx('CaretD')}></FontAwesomeIcon>
-                                    </span>
                                     <div className={cx('inputContainer')}>
-                                        <input placeholder="Phone number"></input>
+                                        <input
+                                            required
+                                            type="email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            placeholder="Phone number"
+                                        ></input>
                                     </div>
                                 </div>
-                                <div className={cx('input')}>
-                                    <input placeholder="Enter 6-digit code" className={cx('sendcode')}></input>
-                                    <Button disabled className={cx('btnSendcode')}>
-                                        Send Code
-                                    </Button>
+                                <div className={cx('label')}>
+                                    <div className={cx('inputContainer')}>
+                                        <input
+                                            type="password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            placeholder="Enter your password"
+                                        ></input>
+                                    </div>
                                 </div>
+                                {!Error('Wrong password or username')}
                                 <div>
                                     <Button href={null} text>
                                         Log in with password
                                     </Button>
                                 </div>
                                 <div>
-                                    <Button disabled className={cx('btnLogin')}>
+                                    <Button className={cx('btnLogin')} onClick={handleLogin}>
                                         Log in
                                     </Button>
                                 </div>

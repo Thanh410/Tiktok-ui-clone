@@ -1,40 +1,41 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Button from '~/components/Button/Button';
 import { FBIcon, GGIcon, LineIcon, QRIcon, TalkIcon, TwitterIcon, UserIcon } from '~/components/Icons/icon';
 import styles from './modal.module.scss';
 import config from '~/config/config';
+import { auth, provider } from '~/firebase';
+import { signInWithPopup } from 'firebase/auth';
+
 const cx = classNames.bind(styles);
 
-// Authen username/password
-
-// Authen GG
-const uiConfig = {
-    signInFlow: 'redirect',
-    signInSuccessUrl: '/',
-    signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
-    callbacks: {
-        // Avoid redirects after sign-in.
-        signInSuccessWithAuthResult: () => false,
-    },
-};
-
 function Login() {
-    const [modal, setModal] = useState(true);
+    const [modal, setModal] = useState(false);
     const handleCloseModal = () => {
-        setModal(false);
+        setModal(true);
     };
-
+    const [email, setEmail] = useState('');
+    const handleAuthGoogle = () => {
+        signInWithPopup(auth, provider)
+            .then((data) => {
+                setEmail(data.user.email);
+                localStorage.setItem('email', data.user.email);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+    useEffect(() => setEmail(localStorage.getItem('email')), [email]);
+    const navigate = Navigate('/');
     return (
         <>
-            {modal && (
+            {modal ? (
+                navigate
+            ) : (
                 <div className={cx('wrapper')}>
                     <div className={cx('modal')}>
                         <div className={cx('closeModal')} onClick={handleCloseModal}>
@@ -47,7 +48,7 @@ function Login() {
                                     <p className={cx('textLogin')}>Use QR code</p>
                                 </Button>
                             </Link>
-                            <Link className={cx('boxLink')} to={config.routes.email}>
+                            <Link className={cx('boxLink')} to={config.routes.emailLogin}>
                                 <Button boxContainer leftIcon={<UserIcon />}>
                                     <p className={cx('textLogin')}>Use phone / email / username</p>
                                 </Button>
@@ -58,7 +59,7 @@ function Login() {
                                 </Button>
                             </Link>
                             <Link className={cx('boxLink')} to={config.routes.login}>
-                                <Button boxContainer leftIcon={<GGIcon />}>
+                                <Button boxContainer leftIcon={<GGIcon />} onClick={handleAuthGoogle}>
                                     <p className={cx('textLogin')}>Continue with Google</p>
                                 </Button>
                             </Link>
@@ -81,9 +82,6 @@ function Login() {
                                 <Button boxContainer leftIcon={<UserIcon />}>
                                     <p className={cx('textLogin')}>Continue with KakaoTalk</p>
                                 </Button>
-                            </Link>
-                            <Link to={config.routes.home}>
-                                <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
                             </Link>
                         </div>
                         <div className={cx('footerModal')}>

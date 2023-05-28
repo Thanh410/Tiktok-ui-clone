@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
@@ -20,6 +20,7 @@ import Menu from '~/components/Popper/Menu/Menu';
 import Search from '~/components/Search/Search';
 import config from '~/config/config';
 import * as http from '~/utils/http';
+import { auth } from '~/firebase';
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -105,19 +106,29 @@ const MENU_ITEMS = [
 function Header() {
     const handleonChange = (menuItem) => {
         if (menuItem.title === 'Log out') {
-            currentUser.auth.signOut();
+            auth.signOut();
             console.log(menuItem.to);
         }
     };
 
     // Xu li dang nhap
+    const [user, setUser] = useState(null);
     const currentUser = firebase.auth().currentUser;
     useEffect(() => {
         const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async (user) => {
             if (!user) {
                 return null;
+            } else {
+                setUser(user);
+                user.updateProfile({
+                    // <-- Update Method here
+
+                    displayName: currentUser.displayName,
+                    photoURL: currentUser.photoURL,
+                });
             }
             const token = await user.getIdToken();
+
             // Get me when signed in
         });
         return () => {
@@ -220,7 +231,7 @@ function Header() {
                 {/* Search */}
                 <Search />
                 <div className={cx('actions')}>
-                    {!!currentUser ? (
+                    {user ? (
                         <>
                             <Button outline leftIcon={<FontAwesomeIcon icon={faPlus} />}>
                                 <span>Upload</span>
@@ -248,8 +259,8 @@ function Header() {
                             </Button>
                         </>
                     )}
-                    <Menu items={userMenu} onChange={handleonChange}>
-                        {!!currentUser ? (
+                    <Menu items={!user ? userMenu : MENU_ITEMS} onChange={handleonChange}>
+                        {user ? (
                             <Image
                                 src={currentUser.photoURL}
                                 className={cx('user-avatar')}

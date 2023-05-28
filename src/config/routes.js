@@ -8,8 +8,9 @@ const routesConfig = {
     explore: '/explore',
     signup: '/signup',
     login: '/login',
-    qrcode: '/qrcode',
-    email: '/email',
+    qrcodeLogin: '/login/qrcode',
+    emailLogin: '/login/email',
+    emailSignup: '/signup/email',
 };
 
 export default routesConfig;

@@ -1,31 +1,15 @@
 import { useState, useEffect } from 'react';
 
-import { faArrowDown, faChevronDown, faChevronLeft, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faChevronLeft, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Link } from 'react-router-dom';
 import Button from '~/components/Button/Button';
-import { FBIcon, GGIcon, LineIcon, QRIcon, TalkIcon, TwitterIcon, UserIcon } from '~/components/Icons/icon';
+import { FBIcon, GGIcon, LineIcon, TalkIcon, TwitterIcon, UserIcon } from '~/components/Icons/icon';
 import styles from './modal.module.scss';
 import config from '~/config/config';
 
 const cx = classNames.bind(styles);
-
-// Authen username/password
-
-// Authen GG
-const uiConfig = {
-    signInFlow: 'redirect',
-    signInSuccessUrl: '/',
-    signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
-    callbacks: {
-        // Avoid redirects after sign-in.
-        signInSuccessWithAuthResult: () => false,
-    },
-};
 
 function SignUp() {
     const [menuItem, setMenuItem] = useState(false);
@@ -55,7 +39,7 @@ function SignUp() {
                             <h2 className={cx('titleModal')}>Sign up to TikTok</h2>
 
                             <Link className={cx('boxLink')}>
-                                <Button boxContainer leftIcon={<UserIcon />} to={config.routes.email}>
+                                <Button boxContainer leftIcon={<UserIcon />} to={config.routes.emailSignup}>
                                     <p className={cx('textLogin')}>Use phone / email / username</p>
                                 </Button>
                             </Link>
