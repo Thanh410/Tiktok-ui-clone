@@ -1,23 +1,27 @@
 import styles from './Home.module.scss';
 import classNames from 'classnames/bind';
-import PropTypes from 'prop-types';
 import Video from '~/components/Video';
+import useFetch from '../../components/Hook/useFetch';
+import * as contentServices from '~/apiServices/contentServices';
+import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
 function Home() {
+    const [contents, setContents] = useState([]);
+
+    const fetchApi = async () => {
+        const result = await contentServices.content('for-you', 15);
+        return setContents(result);
+    };
+    fetchApi();
     return (
         <div className={cx('wrapper')}>
-            <Video />
-            <Video />
-            <Video />
-            <Video />
-            <Video />
-            <Video />
+            {contents.map((data, index) => (
+                <Video key={index} data={data} />
+            ))}
         </div>
     );
 }
-
-Home.propTypes = {};
 
 export default Home;

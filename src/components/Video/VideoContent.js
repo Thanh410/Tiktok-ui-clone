@@ -4,12 +4,11 @@ import { faComment, faHeart, faPlay, faShare, faVolumeUp } from '@fortawesome/fr
 import styles from './Video.module.scss';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import videos from '~/assets/videos/1.mp4';
 import useElementOnScreen from '~/components/useElementOnScreen';
 
 const cx = classNames.bind(styles);
-function VideoContent() {
-    const videoRef = useRef();
+function VideoContent({ comments_count, likes_count, shares_count, file_url }) {
+    const videoRef = useRef(null);
     const [playing, setPlaying] = useState(false);
 
     const options = {
@@ -19,10 +18,19 @@ function VideoContent() {
     };
 
     const isVisibile = useElementOnScreen(options, videoRef);
+    const handleVideo = () => {
+        if (playing) {
+            videoRef.current.pause();
+            setPlaying(false);
+        } else {
+            videoRef.current.play();
+            setPlaying(true);
+        }
+    };
 
     useEffect(() => {
         if (isVisibile) {
-            if (!playing) {
+            if (!playing && !undefined) {
                 videoRef.current.play();
                 setPlaying(true);
             }
@@ -34,43 +42,23 @@ function VideoContent() {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isVisibile]);
-    const handleVideo = () => {
-        if (playing) {
-            videoRef.current.pause();
-            setPlaying(false);
-        } else {
-            videoRef.current.play([]);
-            setPlaying(true);
-        }
-    };
 
-    // Xu li like video
-    const currentIndex = 190;
+    // Xu li likes_count video
+    const currentLike = likes_count;
     const [active, setActive] = useState(false);
-    const [like, setLike] = useState(currentIndex);
+    const [likes, setLikes] = useState(currentLike);
     const handleLike = () => {
-        if (like !== currentIndex) {
-            setLike(like - 1);
-            setActive(false);
-        } else {
-            setLike(like + 1);
+        if (active) {
+            setLikes(currentLike + 1);
             setActive(true);
+        } else {
+            setLikes(currentLike);
         }
     };
-
     return (
         <div className={cx('videoCard')}>
             <div className={cx('videoContent')}>
-                <video
-                    ref={videoRef}
-                    onClick={handleVideo}
-                    className={cx('videoPlayer')}
-                    width="320"
-                    height="240"
-                    src={videos}
-                    controls
-                    loop
-                ></video>
+                <video ref={videoRef} onClick={handleVideo} className={cx('videoPlayer')} src={file_url} loop />
             </div>
 
             <div className={cx('actionItem')}>
@@ -83,19 +71,19 @@ function VideoContent() {
                             })}
                         />
                     </span>
-                    <strong className={cx('text')}>{like}</strong>
+                    <strong className={cx('text')}>{likes}</strong>
                 </button>
                 <button className={cx('btn-actionItem')}>
                     <span className={cx('circle')}>
                         <FontAwesomeIcon icon={faComment} className={cx('actionIcon')} />
                     </span>
-                    <strong className={cx('text')}>195</strong>
+                    <strong className={cx('text')}>{comments_count}</strong>
                 </button>
                 <button className={cx('btn-actionItem')}>
                     <span className={cx('circle')}>
                         <FontAwesomeIcon icon={faShare} className={cx('actionIcon')} />
                     </span>
-                    <strong className={cx('text')}>92</strong>
+                    <strong className={cx('text')}>{shares_count}</strong>
                 </button>
             </div>
         </div>

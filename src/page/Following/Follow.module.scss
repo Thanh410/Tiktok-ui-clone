@@ -1,0 +1,54 @@
+.Wapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+    width: 740px;
+    margin-left: 240px;
+}
+
+.CardItem {
+    position: relative;
+    margin-right: 18px;
+    margin-bottom: 18px;
+}
+.cardImg {
+    width: 226px;
+    border-radius: 8px;
+}
+
+.CardInfo {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    padding: 30px 12px 20px;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-bottom: 14px;
+    flex-shrink: 0;
+}
+
+.nameuser {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.nickname {
+    font-size: 1.4rem;
+    color: var(--white);
+    font-weight: 600;
+}
+
+.btnFollow {
+    width: 164px;
+    height: 37px;
+}

@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { faChevronLeft, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Button from '~/components/Button/Button';
 import config from '~/config/config';
 import styles from '../modal.module.scss';
 import 'firebase/compat/auth';
 import firebase from 'firebase/compat/app';
+import { AuthContext } from '~/context/AuthContext';
 const cx = classNames.bind(styles);
 
 function Email() {
@@ -16,9 +17,10 @@ function Email() {
     const handleCloseModal = () => {
         setModal(false);
     };
-
+    const { user, error } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    // Handle Enable login
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -27,11 +29,11 @@ function Email() {
             .signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in
-                console.log(userCredential);
             })
             .catch((error) => {
                 console.log(error);
             });
+        Navigate('/');
     };
     return (
         <>
@@ -62,7 +64,7 @@ function Email() {
                                             type="email"
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
-                                            placeholder="Phone number"
+                                            placeholder="Enter your Email"
                                         ></input>
                                     </div>
                                 </div>
@@ -76,7 +78,7 @@ function Email() {
                                         ></input>
                                     </div>
                                 </div>
-                                {!Error('Wrong password or username')}
+                                {error && <span>Wrong password or username</span>}
                                 <div>
                                     <Button href={null} text>
                                         Log in with password

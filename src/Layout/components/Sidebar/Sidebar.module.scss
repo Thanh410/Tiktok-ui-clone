@@ -25,7 +25,6 @@
 .wrapper {
     display: flex;
     flex-direction: column;
-    width: 224px;
     min-height: 100vh;
     background-color: var(--white);
     padding: 20px 0 26px 8px;
@@ -52,4 +51,42 @@
     height: 100%;
     border-radius: 3px;
     background: rgba(22, 24, 35, 0.06);
+}
+
+// Log In
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login {
+    border-top: 1px solid #f1f1f2;
+    padding: 20px 8px 24px;
+}
+
+.title {
+    color: #16182380;
+    font-size: 1.6rem;
+}
+
+.btnLogin {
+    width: 208px;
+    height: 48px;
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+
+.about {
+    border-top: 1px solid #f1f1f2;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.text {
+    margin-top: 10px;
+    margin-right: 5px;
+    color: #16182380;
+    font-size: 1.2rem;
+    padding: 0;
 }

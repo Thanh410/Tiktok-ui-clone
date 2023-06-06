@@ -30,6 +30,10 @@
     width: 106px;
     height: 34px;
     font-weight: 600;
+    &.active {
+        background-color: var(--primary);
+        color: var(--white);
+    }
 }
 
 .item-info {

@@ -9,10 +9,12 @@
     display: flex;
     justify-content: space-between;
     margin-top: 60px;
-    flex: 1 1 auto;
+    flex: 1;
 }
 
 .content {
+    margin-left: 240px;
+
     flex: 1;
     min-height: 1000px;
     background-color: var(--white);

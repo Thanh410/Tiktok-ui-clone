@@ -31,12 +31,13 @@
     font-weight: 700;
     margin-right: 4px;
     padding: 0;
-    margin-left: -10px;
+    justify-content: flex-start;
 }
 
 .authorName {
     font-size: 1.4rem;
     font-weight: 400;
+    text-decoration: none;
 }
 
 .text {
@@ -156,6 +157,7 @@
     font-size: 1.2rem;
     text-align: center;
     color: #161823bf;
+    font-weight: 700;
 }
 
 // controls

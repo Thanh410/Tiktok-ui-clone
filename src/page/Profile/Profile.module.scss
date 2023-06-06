@@ -1,0 +1,138 @@
+.wrapper {
+    background-color: var(--default-background);
+    margin-left: 10px;
+    padding: 32px 24px;
+    transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.profileInfo {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    margin-bottom: 20px;
+    max-width: 624px;
+    padding-right: 92px;
+    position: relative;
+}
+
+.headerInfo {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.avatar {
+    border-radius: 50%;
+    height: 116px;
+    object-fit: cover;
+    width: 116px;
+}
+
+.nameInfo {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.btnEdit {
+    margin-top: 20px;
+    font-weight: 700;
+}
+
+.profileCount {
+    align-items: center;
+    color: var(--text-primary-color);
+    display: flex;
+    margin-top: 22px;
+
+    &span {
+        color: var(--text-color);
+        font-size: 1.6rem;
+        font-weight: 400;
+        margin-right: 50px;
+        padding-bottom: 2px;
+    }
+
+    &strong {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-right: 6px;
+    }
+}
+
+.profileCount strong {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-right: 6px;
+}
+
+.profileCount span {
+    color: var(--text-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-right: 50px;
+    padding-bottom: 2px;
+}
+
+.profileLink {
+    align-items: center;
+    color: var(--text-primary-color);
+    display: flex;
+    font-family: SofiaPro;
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 22px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-left: -20px;
+}
+
+.videoRedirect {
+    border-bottom: 1px solid hsla(0, 7%, 82%, 0.2);
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    width: 100%;
+    align-items: center;
+}
+
+.tabItem {
+    align-items: center;
+    color: var(--background-gray-color-05);
+    cursor: pointer;
+    display: flex;
+    font-size: 1.8rem;
+    font-weight: 700;
+    height: 44px;
+    justify-content: center;
+    line-height: 25px;
+    transition: all 0.2s ease-in-out;
+    width: 50%;
+}
+
+.profileIcon {
+    color: var(--text-primary-color);
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 64px;
+}
+
+.iconShare,
+.iconMore {
+    color: var(--text-primary-color);
+    cursor: pointer;
+}
+
+.profileActive {
+    background-color: var(--text-primary-color);
+    bottom: 0;
+    height: 2px;
+    position: absolute;
+    transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+    width: 50%;
+}

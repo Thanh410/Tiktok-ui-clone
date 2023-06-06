@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { faChevronDown, faChevronLeft, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -39,23 +39,28 @@ function SignUp() {
                             <h2 className={cx('titleModal')}>Sign up to TikTok</h2>
 
                             <Link className={cx('boxLink')}>
-                                <Button boxContainer leftIcon={<UserIcon />} to={config.routes.emailSignup}>
-                                    <p className={cx('textLogin')}>Use phone / email / username</p>
+                                <Button
+                                    className={cx('textLogin')}
+                                    boxContainer
+                                    leftIcon={<UserIcon />}
+                                    to={config.routes.emailSignup}
+                                >
+                                    <p>Use phone / email / username</p>
                                 </Button>
                             </Link>
                             <Link className={cx('boxLink')}>
                                 <Button boxContainer leftIcon={<FBIcon />}>
-                                    <p className={cx('textLogin')}>Continue with Facebook</p>
+                                    <p>Continue with Facebook</p>
                                 </Button>
                             </Link>
                             <Link className={cx('boxLink')}>
-                                <Button boxContainer leftIcon={<GGIcon />}>
-                                    <p className={cx('textLogin')}>Continue with Google</p>
+                                <Button className={cx('textLogin')} boxContainer leftIcon={<GGIcon />}>
+                                    <p>Continue with Google</p>
                                 </Button>
                             </Link>
                             {!menuItem && (
                                 <div>
-                                    <Button onClick={handleShowMenu}>
+                                    <Button className={cx('textLogin')} onClick={handleShowMenu}>
                                         <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
                                     </Button>
                                 </div>
@@ -65,17 +70,17 @@ function SignUp() {
                                 <>
                                     <Link className={cx('boxLink')}>
                                         <Button boxContainer leftIcon={<TwitterIcon />}>
-                                            <p className={cx('textLogin')}>Continue with Twitter</p>
+                                            <p>Continue with Twitter</p>
                                         </Button>
                                     </Link>
                                     <Link className={cx('boxLink')}>
-                                        <Button boxContainer leftIcon={<LineIcon />}>
-                                            <p className={cx('textLogin')}>Continue with LINE</p>
+                                        <Button className={cx('textLogin')} boxContainer leftIcon={<LineIcon />}>
+                                            <p>Continue with LINE</p>
                                         </Button>
                                     </Link>
                                     <Link className={cx('boxLink')}>
-                                        <Button boxContainer leftIcon={<TalkIcon />}>
-                                            <p className={cx('textLogin')}>Continue with KakaoTalk</p>
+                                        <Button className={cx('textLogin')} boxContainer leftIcon={<TalkIcon />}>
+                                            <p>Continue with KakaoTalk</p>
                                         </Button>
                                     </Link>
                                 </>
@@ -84,7 +89,7 @@ function SignUp() {
                         <div className={cx('footerModal')}>
                             <div className={cx('bottomText')}>
                                 <p>Already have an account? </p>
-                                <Link to={config.routes.login}>
+                                <Link className={cx('logIn')} to={config.routes.login}>
                                     <Button textPrimary text to={null}>
                                         Log in
                                     </Button>

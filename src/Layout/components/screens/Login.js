@@ -10,14 +10,17 @@ import styles from './modal.module.scss';
 import config from '~/config/config';
 import { auth, provider } from '~/firebase';
 import { signInWithPopup } from 'firebase/auth';
+import firebase from 'firebase/compat/app';
 
 const cx = classNames.bind(styles);
 
 function Login() {
-    const [modal, setModal] = useState(false);
+    const [modal, setModal] = useState(true);
     const handleCloseModal = () => {
-        setModal(true);
+        setModal(false);
+        Navigate('/');
     };
+    // Auth google
     const [email, setEmail] = useState('');
     const handleAuthGoogle = () => {
         signInWithPopup(auth, provider)
@@ -30,15 +33,27 @@ function Login() {
             });
     };
     useEffect(() => setEmail(localStorage.getItem('email')), [email]);
+
+    // listen login
+    const [user, setUser] = useState(null);
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged(async (user) => {
+            if (user) {
+                setUser(user);
+            } else {
+                setUser(null);
+            }
+        });
+    }, []);
     const navigate = Navigate('/');
     return (
         <>
-            {modal ? (
+            {user ? (
                 navigate
             ) : (
                 <div className={cx('wrapper')}>
                     <div className={cx('modal')}>
-                        <div className={cx('closeModal')} onClick={handleCloseModal}>
+                        <div className={cx('closeModal')} onClick={() => setUser(true)}>
                             <FontAwesomeIcon className={cx('close')} icon={faXmark}></FontAwesomeIcon>
                         </div>
                         <div className={cx('loginContainer')}>
@@ -87,7 +102,7 @@ function Login() {
                         <div className={cx('footerModal')}>
                             <div className={cx('bottomText')}>
                                 <p>Don’t have an account?</p>
-                                <Link to={config.routes.signup}>
+                                <Link className={cx('signUp')} to={config.routes.signup}>
                                     <Button textPrimary text to={null}>
                                         Sign up
                                     </Button>
