@@ -128,7 +128,6 @@ function Header() {
             unregisterAuthObserver();
         };
     }, []);
-
     const userMenu = [
         {
             icon: (
@@ -243,7 +242,7 @@ function Header() {
                             </Button>
                         </>
                     )}
-                    <Menu items={user && !null ? userMenu : MENU_ITEMS} onChange={handleonChange}>
+                    <Menu items={!user ? userMenu : MENU_ITEMS} onChange={handleonChange}>
                         {user ? (
                             <Image
                                 src={

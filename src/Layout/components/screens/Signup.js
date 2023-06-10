@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { faChevronDown, faChevronLeft, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '~/components/Button/Button';
 import { FBIcon, GGIcon, LineIcon, TalkIcon, TwitterIcon, UserIcon } from '~/components/Icons/icon';
 import styles from './modal.module.scss';
@@ -17,9 +17,11 @@ function SignUp() {
         setMenuItem(true);
     };
 
+    const navigate = useNavigate();
     const [modal, setModal] = useState(true);
     const handleCloseModal = () => {
         setModal(false);
+        navigate('/');
     };
 
     return (

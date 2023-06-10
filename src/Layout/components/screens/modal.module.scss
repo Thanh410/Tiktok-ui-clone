@@ -73,6 +73,22 @@
     text-align: center;
 }
 
+.descTitle {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.link {
+    font-size: 12px;
+    font-weight: 600;
+    color: #161823bf;
+    &:hover {
+        text-decoration: underline;
+        color: var(--text-color);
+    }
+}
+
 .boxLink {
     margin-bottom: 16px;
     position: relative;
@@ -185,6 +201,19 @@
     background-color: #f1f1f2;
     width: 100%;
     margin-top: 16px;
+    height: 46px;
+    font-size: 16px;
+    font-weight: 700;
+
+    &.primary {
+        background-color: var(--primary);
+        color: var(--white);
+    }
+
+    &.disabled {
+        cursor: not-allowed;
+        color: #999;
+    }
 }
 .logIn,
 .signUp {
@@ -193,4 +222,8 @@
 
 .textLogin {
     flex: 1;
+}
+
+.linkSignUp {
+    margin-left: 20px;
 }

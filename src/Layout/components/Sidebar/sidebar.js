@@ -18,6 +18,7 @@ import SuggestedAccounts from '~/components/SuggestedAccounts';
 import Discover from '~/components/Discover';
 import { useContext } from 'react';
 import { AuthContext } from '~/context/AuthContext';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -56,9 +57,11 @@ function Sidebar() {
                     <div className={cx('container')}>
                         <div className={cx('login')}>
                             <p className={cx('title')}>Log in to follow creators, like videos, and view comments.</p>
-                            <Button className={cx('btnLogin')} primaryOutline>
-                                Log in
-                            </Button>
+                            <Link to={config.routes.login}>
+                                <Button className={cx('btnLogin')} primaryOutline>
+                                    Log in
+                                </Button>
+                            </Link>
                         </div>
                         <div className={cx('about')}>
                             <p className={cx('text')}>About</p>

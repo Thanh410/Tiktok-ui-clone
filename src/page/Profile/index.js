@@ -2,12 +2,20 @@ import Button from '~/components/Button/Button';
 import styles from './Profile.module.scss';
 import classNames from 'classnames/bind';
 import { BlockIcon, LinkIcon, MoreIcon, NoteIcon, ShareIcon } from '~/components/Icons/icon';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '~/context/AuthContext';
+import axios from 'axios';
+import * as userServices from '../../apiServices/userServices';
 
 const cx = classNames.bind(styles);
 
 function Profile() {
+    const { user, loading } = useContext(AuthContext);
+    console.log(user);
+    const fetchApi = async () => {
+        const result = await userServices.user();
+    };
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('profileInfo')}>

@@ -10,6 +10,7 @@ import Image from '~/components/Image/image';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountPreview from '~/components/SuggestedAccounts/AccountPreview';
 import { Link } from 'react-router-dom';
+import config from '~/config/config';
 
 const cx = classNames.bind(styles);
 
@@ -35,7 +36,7 @@ function VideoItem({ user, description, music }) {
     return (
         <div className={cx('infoItem')}>
             <Tippy placement="bottom-start" delay={[0, 200]} offset={[0, 1]} interactive render={renderPreview}>
-                <Link to={user.nickname}>
+                <Link to={config.routes.profile}>
                     <Image src={user.avatar} alt={user.nickname} className={cx('avatar')} />
                 </Link>
             </Tippy>

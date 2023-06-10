@@ -27,14 +27,14 @@ function Email() {
         firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                // Signed in
-            })
+            .then((userCredential) => {})
             .catch((error) => {
                 console.log(error);
             });
         Navigate('/');
     };
+
+    var value = { email, password };
     return (
         <>
             {modal && (
@@ -52,10 +52,10 @@ function Email() {
                             <h2 className={cx('titleModal')}>Log in</h2>
                             <div className={cx('formLogin')}>
                                 <div className={cx('des')}>
-                                    <p>Email/username</p>
-                                    <Button href={null} text>
-                                        Log in with email or username
-                                    </Button>
+                                    <p className={cx('descTitle')}>Email or username</p>
+                                    <Link className={cx('link')} to={config.routes.phone}>
+                                        Log in with phone
+                                    </Link>
                                 </div>
                                 <div className={cx('label')}>
                                     <div className={cx('inputContainer')}>
@@ -64,7 +64,7 @@ function Email() {
                                             type="email"
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
-                                            placeholder="Enter your Email"
+                                            placeholder="Email or username"
                                         ></input>
                                     </div>
                                 </div>
@@ -74,18 +74,21 @@ function Email() {
                                             type="password"
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
-                                            placeholder="Enter your password"
+                                            placeholder="Password"
                                         ></input>
                                     </div>
                                 </div>
                                 {error && <span>Wrong password or username</span>}
                                 <div>
-                                    <Button href={null} text>
-                                        Log in with password
-                                    </Button>
+                                    <Link className={cx('link')} to={null}>
+                                        Forgot password?
+                                    </Link>
                                 </div>
                                 <div>
-                                    <Button className={cx('btnLogin')} onClick={handleLogin}>
+                                    <Button
+                                        className={cx('btnLogin', email && password ? 'primary' : 'disabled')}
+                                        onClick={handleLogin}
+                                    >
                                         Log in
                                     </Button>
                                 </div>
@@ -94,7 +97,7 @@ function Email() {
                         <div className={cx('footerModal')}>
                             <div className={cx('bottomText')}>
                                 <p>Don’t have an account?</p>
-                                <Link to={config.routes.signup}>
+                                <Link to={config.routes.signup} className={cx('linkSignUp')}>
                                     <Button textPrimary text to={null}>
                                         Sign up
                                     </Button>

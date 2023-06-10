@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Button from '~/components/Button/Button';
 import { FBIcon, GGIcon, LineIcon, QRIcon, TalkIcon, TwitterIcon, UserIcon } from '~/components/Icons/icon';
 import styles from './modal.module.scss';
@@ -16,9 +16,12 @@ const cx = classNames.bind(styles);
 
 function Login() {
     const [modal, setModal] = useState(true);
+    const navigate = useNavigate();
+
     const handleCloseModal = () => {
         setModal(false);
-        Navigate('/');
+        setUser(true);
+        navigate('/');
     };
     // Auth google
     const [email, setEmail] = useState('');
@@ -27,6 +30,7 @@ function Login() {
             .then((data) => {
                 setEmail(data.user.email);
                 localStorage.setItem('email', data.user.email);
+                navigate('/');
             })
             .catch((error) => {
                 console.log(error);
@@ -45,7 +49,6 @@ function Login() {
             }
         });
     }, []);
-    const navigate = Navigate('/');
     return (
         <>
             {user ? (
@@ -53,7 +56,7 @@ function Login() {
             ) : (
                 <div className={cx('wrapper')}>
                     <div className={cx('modal')}>
-                        <div className={cx('closeModal')} onClick={() => setUser(true)}>
+                        <div className={cx('closeModal')} onClick={handleCloseModal}>
                             <FontAwesomeIcon className={cx('close')} icon={faXmark}></FontAwesomeIcon>
                         </div>
                         <div className={cx('loginContainer')}>
