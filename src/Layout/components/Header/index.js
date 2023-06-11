@@ -20,6 +20,7 @@ import Search from '~/components/Search/Search';
 import config from '~/config/config';
 import { auth } from '~/firebase';
 import { AuthContext } from '~/context/AuthContext';
+import { ThemeContext } from '~/context/ThemeContext';
 
 const cx = classNames.bind(styles);
 
@@ -108,6 +109,12 @@ function Header() {
         if (menuItem.title === 'Log out') {
             auth.signOut();
             Navigate(menuItem.to);
+        }
+        switch (menuItem.title) {
+            case 'Dark mode':
+                return;
+            default:
+                console.log('err');
         }
     };
 
@@ -202,16 +209,22 @@ function Header() {
             separate: true,
         },
     ];
-
+    const themeContext = useContext(ThemeContext);
     return (
-        <header className={cx('wrapper')}>
+        <header className={cx('wrapper', themeContext.theme)}>
             <div className={cx('inner')}>
-                <Link to={config.routes.home} className={cx('logo')}>
-                    <img src={image.logo} alt="TikTok" className={cx('tiktok')} />
-                </Link>
+                <div className={cx('leftContainer')}>
+                    <Link to={config.routes.home} className={cx('logo')}>
+                        <img
+                            src={themeContext.theme === 'dark' ? image.logoLight : image.logoDark}
+                            alt="TikTok"
+                            className={cx('tiktok')}
+                        />
+                    </Link>
+                </div>
                 {/* Search */}
                 <Search />
-                <div className={cx('actions')}>
+                <div className={cx('actions', themeContext.theme)}>
                     {user ? (
                         <>
                             <Link to={config.routes.upload}>
@@ -234,7 +247,7 @@ function Header() {
                         </>
                     ) : (
                         <>
-                            <Button outline leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+                            <Button outline className={cx('btnUpload')} leftIcon={<FontAwesomeIcon icon={faPlus} />}>
                                 <span>Upload</span>
                             </Button>
                             <Button to={config.routes.login} primary>

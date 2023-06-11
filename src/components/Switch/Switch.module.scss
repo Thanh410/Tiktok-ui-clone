@@ -1,0 +1,47 @@
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    .checkbox {
+        width: 0;
+        height: 0;
+        opacity: 0;
+        &:checked + .slider {
+            background-color: #0be09b;
+        }
+        &:checked + .slider:before {
+            transform: translateX(20px);
+        }
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+
+        &.rounded {
+            border-radius: 34px;
+        }
+
+        &.rounded::before {
+            border-radius: 50%;
+        }
+        &::before {
+            content: '';
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 2px;
+            background-color: #fff;
+            transition: 0.4s;
+        }
+    }
+}

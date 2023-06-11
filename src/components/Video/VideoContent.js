@@ -1,13 +1,15 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 
 import { faComment, faHeart, faPlay, faShare, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 import styles from './Video.module.scss';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useElementOnScreen from '~/components/useElementOnScreen';
+import { ThemeContext } from '~/context/ThemeContext';
 
 const cx = classNames.bind(styles);
 function VideoContent({ comments_count, likes_count, shares_count, file_url }) {
+    const themeContext = useContext(ThemeContext);
     const videoRef = useRef(null);
     const [playing, setPlaying] = useState(false);
 
@@ -56,7 +58,7 @@ function VideoContent({ comments_count, likes_count, shares_count, file_url }) {
         }
     };
     return (
-        <div className={cx('videoCard')}>
+        <div className={cx('videoCard', themeContext.theme)}>
             <div className={cx('videoContent')}>
                 <video ref={videoRef} onClick={handleVideo} className={cx('videoPlayer')} src={file_url} loop />
             </div>

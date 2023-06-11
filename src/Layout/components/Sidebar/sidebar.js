@@ -19,13 +19,15 @@ import Discover from '~/components/Discover';
 import { useContext } from 'react';
 import { AuthContext } from '~/context/AuthContext';
 import { Link } from 'react-router-dom';
+import { ThemeContext } from '~/context/ThemeContext';
 
 const cx = classNames.bind(styles);
 
 function Sidebar() {
     const { user } = useContext(AuthContext);
+    const themeContext = useContext(ThemeContext);
     return (
-        <div className={cx('scrollSidebar')}>
+        <div className={cx('scrollSidebar', themeContext.theme)}>
             <aside className={cx('wrapper')}>
                 <Menu>
                     <MenuItem

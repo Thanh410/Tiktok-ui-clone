@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import styles from './Menu.module.scss';
 import classNames from 'classnames/bind';
@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 import MenuItem from './MenuItem';
 import Header from './Header';
+import { ThemeContext } from '~/context/ThemeContext';
 
 const cx = classNames.bind(styles);
 const defaultFn = () => {};
@@ -16,7 +17,7 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
     const [history, setHistory] = useState([{ data: items }]);
 
     const current = history[history.length - 1];
-
+    const themeContext = useContext(ThemeContext);
     const renderItems = () => {
         return current.data.map((item, index) => {
             const isParent = !!item.children;
@@ -45,7 +46,7 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
             placement="bottom-end"
             onHide={() => setHistory((prev) => prev.slice(0, 1))}
             render={(attrs) => (
-                <div className={cx('menu-items')} tabIndex="-1" {...attrs}>
+                <div className={cx('menu-items', themeContext.theme)} tabIndex="-1" {...attrs}>
                     <PopperWrapper className={cx('menu-popper')}>
                         {history.length > 1 && (
                             <Header

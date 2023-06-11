@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 
 import styles from './Search.module.scss';
 import classNames from 'classnames/bind';
@@ -10,6 +10,7 @@ import { faCircleXmark, faCircleNotch, faSearch } from '@fortawesome/free-solid-
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDebounce } from '~/components/Hook';
+import { ThemeContext } from '~/context/ThemeContext';
 
 const cx = classNames.bind(styles);
 
@@ -19,7 +20,7 @@ function Search() {
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
     const inputRef = useRef();
-
+    const themeContext = useContext(ThemeContext);
     const debounce = useDebounce(searchValue, 500);
     useEffect(() => {
         if (!debounce.trim()) {
@@ -72,7 +73,7 @@ function Search() {
             )}
             onClickOutside={handleHideResult}
         >
-            <div className={cx('search')}>
+            <div className={cx('search', themeContext.theme)}>
                 <input
                     ref={inputRef}
                     value={searchValue}
@@ -88,7 +89,7 @@ function Search() {
                 )}
                 {loading && <FontAwesomeIcon className={cx('loading')} icon={faCircleNotch} />}
 
-                <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
+                <button className={cx('search-btn', themeContext.theme)} onMouseDown={(e) => e.preventDefault()}>
                     <FontAwesomeIcon icon={faSearch} />
                 </button>
             </div>

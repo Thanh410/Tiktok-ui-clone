@@ -1,7 +1,8 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { DefaultLayout } from '~/Layout';
 import { privateRoutes, publicRoutes } from '~/routes';
+import { ThemeContext } from './context/ThemeContext';
 
 // Configure Firebase.
 // const config = {
@@ -13,9 +14,10 @@ import { privateRoutes, publicRoutes } from '~/routes';
 //     firebase.initializeApp(config);
 // }
 function App() {
+    const themeContext = useContext(ThemeContext);
     return (
         <Router>
-            <div className="App">
+            <div className={themeContext.theme}>
                 <Routes>
                     {publicRoutes.map((route, index) => {
                         let Layout = DefaultLayout;

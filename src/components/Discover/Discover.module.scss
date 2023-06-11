@@ -1,5 +1,13 @@
-.wrapper {
-    border-top: 1px solid #1618231f;
+.light {
+    &.wrapper {
+        border-top: 1px solid #1618231f;
+    }
+}
+
+.dark {
+    &.wrapper {
+        border-top: 1px solid #ffffff1f;
+    }
 }
 
 .label {

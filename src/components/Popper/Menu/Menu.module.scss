@@ -2,36 +2,81 @@
 .menu-items {
     width: 224px;
 
-    .menu-item {
-        margin-left: 0;
+    &.dark {
+        // Menu Item
+        .menu-item {
+            width: 100%;
+            justify-content: flex-start;
+            align-items: center;
+            border-radius: 0;
+            font-weight: 600;
+            padding: 20px 16px;
+            line-height: 2rem;
+            color: var(--white);
+            margin-left: 0;
+            background-color: #252525;
+
+            &:hover {
+                background-color: #ffffff14;
+            }
+
+            &.separate {
+                border-top: 1px solid #ffffff14;
+            }
+        }
+    }
+
+    &.light {
+        // Menu Item
+        .menu-item {
+            width: 100%;
+            justify-content: flex-start;
+            align-items: center;
+            border-radius: 0;
+            font-weight: 600;
+            padding: 20px 16px;
+            line-height: 2rem;
+            color: var(--text-color);
+            margin-left: 0;
+            background-color: var(--white);
+
+            &:hover {
+                background-color: rgba(22, 24, 35, 0.03);
+            }
+
+            &.separate {
+                border-top: 1px solid rgba(22, 24, 35, 0.12);
+            }
+        }
     }
 }
 
-.menu-popper {
-    padding-bottom: 8px;
+.light {
+    .menu-popper {
+        padding-bottom: 8px;
+        background-color: var(--white);
+    }
+
+    .more {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.dark {
+    .menu-popper {
+        padding-bottom: 8px;
+        background-color: #252525;
+    }
+
+    .more {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
 .menu-body {
     overflow-y: auto;
-}
-
-// Menu Item
-.menu-item {
-    width: 100%;
-    justify-content: flex-start;
-    align-items: center;
-    border-radius: 0;
-    font-weight: 600;
-    padding: 20px 16px;
-    line-height: 2rem;
-
-    &:hover {
-        background-color: rgba(22, 24, 35, 0.03);
-    }
-
-    &.separate {
-        border-top: 1px solid rgba(22, 24, 35, 0.12);
-    }
 }
 
 // Header
@@ -53,4 +98,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.mode {
+    display: flex;
+    justify-content: space-between;
 }

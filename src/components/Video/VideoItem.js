@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { faMusic } from '@fortawesome/free-solid-svg-icons';
 import Button from '~/components/Button/Button';
@@ -11,10 +11,13 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountPreview from '~/components/SuggestedAccounts/AccountPreview';
 import { Link } from 'react-router-dom';
 import config from '~/config/config';
+import { ThemeContext } from '~/context/ThemeContext';
 
 const cx = classNames.bind(styles);
 
 function VideoItem({ user, description, music }) {
+    const themeContext = useContext(ThemeContext);
+
     const [active, setActive] = useState(false);
     const handleActive = () => {
         if (active) {
@@ -34,7 +37,7 @@ function VideoItem({ user, description, music }) {
         );
     };
     return (
-        <div className={cx('infoItem')}>
+        <div className={cx('infoItem', themeContext.theme)}>
             <Tippy placement="bottom-start" delay={[0, 200]} offset={[0, 1]} interactive render={renderPreview}>
                 <Link to={config.routes.profile}>
                     <Image src={user.avatar} alt={user.nickname} className={cx('avatar')} />
@@ -57,8 +60,8 @@ function VideoItem({ user, description, music }) {
             </div>
 
             <Button
-                small
                 primaryOutline
+                small
                 className={cx('follow', {
                     active: active,
                 })}

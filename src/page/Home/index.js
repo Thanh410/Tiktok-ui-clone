@@ -1,7 +1,6 @@
 import styles from './Home.module.scss';
 import classNames from 'classnames/bind';
 import Video from '~/components/Video';
-import useFetch from '../../components/Hook/useFetch';
 import * as contentServices from '~/apiServices/contentServices';
 import { useState } from 'react';
 

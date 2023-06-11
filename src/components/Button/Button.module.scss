@@ -116,6 +116,13 @@
 .title {
     font-size: 1.6rem;
     font-weight: 600;
+    width: 100%;
+    text-align: left;
+
+    .mode {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 .circle {
     display: flex;
