@@ -7,6 +7,7 @@ import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountPreview from './AccountPreview';
+import image from '~/assets/image';
 
 const cx = classNames.bind(styles);
 
@@ -33,7 +34,7 @@ function AccountItem() {
                 <div className={cx('account-item')}>
                     <img
                         src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/39911deb09b62b80810dec42c0722bbd~c5_100x100.jpeg?x-expires=1684065600&x-signature=9rAswr9oFxpwoQ69Fmg1XNKuIg0%3D "
-                        alt=""
+                        alt={image.noImage}
                         className={cx('avatar')}
                     />
                     <div className={cx('item-info')}>

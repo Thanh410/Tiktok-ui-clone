@@ -1,24 +1,51 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
+export const locales = {
+    en: 'English',
+    vi: 'Tiếng Việt',
+};
 const resources = {
     en: {
-        'All categories': 'All categories',
+        header: {
+            upload: 'Upload',
+            login: 'Login',
+        },
+
+        sidebar: {
+            foryou: 'For you',
+            following: 'Following',
+            explore: 'Explore',
+            live: 'Live',
+            suggestedAccounts: 'Suggested accounts',
+        },
     },
     vi: {
-        'All categories': 'Tat ca danh muc',
+        header: {
+            upload: 'Tải lên',
+            login: 'Đăng nhập',
+        },
+
+        sidebar: {
+            foryou: 'Dành cho bạn',
+            following: 'Đang theo dõi',
+            explore: 'Khám phá',
+            live: 'Live',
+            suggestedAccounts: 'Các tài khoản đang theo dõi',
+        },
     },
 };
+const defaultNS = 'header';
 
 i18n.use(initReactI18next) // passes i18n down to react-i18next
     .init({
         resources,
-        lng: 'en', // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
-        // you can use the i18n.changeLanguage function to change the language manually: https://www.i18next.com/overview/api#changelanguage
-        // if you're using a language detector, do not define the lng option
-
+        lng: 'en',
+        ns: ['header', 'sidebar'],
+        fallbackLng: 'vi',
+        defaultNS,
         interpolation: {
-            escapeValue: false, // react already safes from xss
+            escapeValue: false,
         },
     });
 

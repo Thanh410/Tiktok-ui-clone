@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useTransition } from 'react';
 
 import classNames from 'classnames/bind';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
 
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
@@ -19,10 +19,12 @@ import Menu from '~/components/Popper/Menu/Menu';
 import Search from '~/components/Search/Search';
 import config from '~/config/config';
 import { auth } from '~/firebase';
-import { AuthContext } from '~/context/AuthContext';
 import { ThemeContext } from '~/context/ThemeContext';
+import { useTranslation } from 'react-i18next';
+import i18n, { locales } from '~/components/Language/i18n';
 
 const cx = classNames.bind(styles);
+const currLanguage = locales[i18n.language];
 
 const MENU_ITEMS = [
     {
@@ -42,17 +44,17 @@ const MENU_ITEMS = [
                 ></path>
             </svg>
         ),
-        title: 'English',
+        title: currLanguage,
         children: {
-            title: 'Languare',
+            title: 'Language',
             data: [
                 {
-                    type: 'Languare',
+                    type: 'Language',
                     code: 'en',
                     title: 'English',
                 },
                 {
-                    type: 'Languare',
+                    type: 'Language',
                     code: 'vi',
                     title: 'Tiếng Việt',
                 },
@@ -105,12 +107,23 @@ const MENU_ITEMS = [
 ];
 
 function Header() {
+    const changeLanguage = (lng) => {
+        i18n.changeLanguage(lng);
+    };
+    const { i18n, t } = useTranslation();
+    const navigate = useNavigate();
+    // Xu li thay doi UI darkmode, change language
     const handleonChange = (menuItem) => {
         if (menuItem.title === 'Log out') {
             auth.signOut();
-            Navigate(menuItem.to);
+            navigate('/');
         }
+
         switch (menuItem.title) {
+            case 'English':
+                return changeLanguage('en') && navigate('/');
+            case 'Tiếng Việt':
+                return changeLanguage('vi');
             case 'Dark mode':
                 return;
             default:
@@ -229,7 +242,7 @@ function Header() {
                         <>
                             <Link to={config.routes.upload}>
                                 <Button outline leftIcon={<FontAwesomeIcon icon={faPlus} />}>
-                                    <span>Upload</span>
+                                    <span>{t('upload')}</span>
                                 </Button>
                             </Link>
                             {/* message */}
@@ -248,10 +261,10 @@ function Header() {
                     ) : (
                         <>
                             <Button outline className={cx('btnUpload')} leftIcon={<FontAwesomeIcon icon={faPlus} />}>
-                                <span>Upload</span>
+                                <span>{t('upload')}</span>
                             </Button>
                             <Button to={config.routes.login} primary>
-                                Log in
+                                {t('login')}
                             </Button>
                         </>
                     )}

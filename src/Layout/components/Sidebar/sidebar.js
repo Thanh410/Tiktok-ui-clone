@@ -20,10 +20,12 @@ import { useContext } from 'react';
 import { AuthContext } from '~/context/AuthContext';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '~/context/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 const cx = classNames.bind(styles);
 
 function Sidebar() {
+    const { t } = useTranslation('sidebar');
     const { user } = useContext(AuthContext);
     const themeContext = useContext(ThemeContext);
     return (
@@ -31,25 +33,25 @@ function Sidebar() {
             <aside className={cx('wrapper')}>
                 <Menu>
                     <MenuItem
-                        title="For You"
+                        title={t('foryou')}
                         to={config.routes.home}
                         icon={<HomeIcon />}
                         activeIcon={<HomeActiveIcon />}
                     ></MenuItem>
                     <MenuItem
-                        title="Following"
+                        title={t('following')}
                         to={config.routes.following}
                         icon={<UserGroupIcon />}
                         activeIcon={<UserGroupActiveIcon />}
                     ></MenuItem>
                     <MenuItem
-                        title="Explore"
+                        title={t('explore')}
                         to={config.routes.explore}
                         icon={<ExploreIcon />}
                         activeIcon={<ExploreActiveIcon />}
                     ></MenuItem>
                     <MenuItem
-                        title="LIVE"
+                        title={t('live')}
                         to={config.routes.live}
                         icon={<LiveIcon />}
                         activeIcon={<LiveActiveIcon />}
@@ -77,7 +79,7 @@ function Sidebar() {
                     </div>
                 ) : (
                     <>
-                        <SuggestedAccounts label="Suggested accounts " />
+                        <SuggestedAccounts label={t('suggestedAccounts')} />
                         <Discover label="Discover" />
                     </>
                 )}
